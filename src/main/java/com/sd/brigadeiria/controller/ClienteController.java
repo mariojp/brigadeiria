@@ -15,7 +15,7 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
     
-    @GetMapping(value="/clientes")
+    @GetMapping("/clientes")
     public List<Cliente> listaClientes(){
         List<Cliente> lista = clienteRepository.findAll();
         return lista;
@@ -23,12 +23,17 @@ public class ClienteController {
 
     /*Exemplo de passagem de parâmetro
     Na url ?tipo= */
-    @GetMapping(value="/clientesportipo/" )
-    public List<Cliente> listaClientesPorTipo(@RequestParam(value="tipo") String tipo){
-        System.out.println("o tipo é" + tipo);        
+    @GetMapping("/clientesportipo" )
+    public List<Cliente> listaClientesPorTipo(@RequestParam String tipo) {     
         List<Cliente> lista = clienteRepository.findByTipo(tipo);
         return lista;
     }
 
+    
+    @GetMapping("/clienteporcpf" )
+    public List<Cliente> listaClientePorCPF(@RequestParam String cpf){
+        List<Cliente> lista = clienteRepository.findByCpf(cpf);
+        return lista;
+    }
     
 }

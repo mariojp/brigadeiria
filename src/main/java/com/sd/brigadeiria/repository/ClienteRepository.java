@@ -11,4 +11,5 @@ import com.sd.brigadeiria.model.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     
     List<Cliente> findByTipo(String tipo);
+    List<Cliente> findByCpf(String cpf);
 }
