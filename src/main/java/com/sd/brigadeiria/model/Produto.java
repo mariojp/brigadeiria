@@ -1,6 +1,8 @@
 package com.sd.brigadeiria.model;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,13 +28,14 @@ public class Produto {
     private List<Sabor> sabores;
 
     @Column
-    private int precoVenda;
+    //Uso do tipo BigDecimal para representação do valor monetário
+    private BigDecimal precoVenda;
 
     public Produto(){
 
     }
 
-    public Produto(String nome, List<Sabor> sabores, int preco){
+    public Produto(String nome, List<Sabor> sabores, BigDecimal  preco){
         this.nome = nome;
         this.sabores = sabores;
         this.precoVenda = preco;
@@ -41,10 +44,10 @@ public class Produto {
     public String getNome() {
         return nome;
     }
-    public int getPrecoVenda() {
+    public BigDecimal getPrecoVenda() {
         return precoVenda;
     }
-    public void setPrecoVenda(int precoVenda) {
+    public void setPrecoVenda(BigDecimal precoVenda) {
         this.precoVenda = precoVenda;
     }
     public List<Sabor> getSabores() {
