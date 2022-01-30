@@ -16,7 +16,7 @@ public class ProdutoController {
     private ProdutoRepository produtoRepository;
 
     @GetMapping("/produtos")
-    public List<Produto> listaClientes(){
+    public List<Produto> listaProdutos(){
         List<Produto> lista = produtoRepository.findAll();
         return lista;
     }
