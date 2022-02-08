@@ -14,7 +14,7 @@ public class HomeController {
     public String home(ModelMap model) {
         model.addAttribute("nomeDoAtributo", "Treinaweb");
 
-        return "clienteform";
+        return "index";
     }
 
     @GetMapping("/novocliente")

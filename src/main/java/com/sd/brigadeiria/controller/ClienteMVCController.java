@@ -16,7 +16,7 @@ public class ClienteMVCController {
     @Autowired
     private ClienteRepository clienteRepository;
     
-    @GetMapping("/clientesm")
+    @GetMapping("/listaclientesm")
     public String listaClientes(Model model){
         model.addAttribute("lista", clienteRepository.findAll());
         return "clientes";
@@ -25,7 +25,7 @@ public class ClienteMVCController {
     @PostMapping("/clientem/salvar")
     public String salvar(Cliente cliente){
         clienteRepository.save(cliente);
-        return "clienteform";
+        return "clientes";
     }
     
 
