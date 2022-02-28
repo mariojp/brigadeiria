@@ -1,9 +1,6 @@
 package com.sd.brigadeiria.controller;
 
-import com.sd.brigadeiria.model.Cliente;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -17,11 +14,5 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/novocliente")
-    public String novoCliPage(Model model) {
-        Cliente cliente = new Cliente();
-        model.addAttribute("cliente", cliente);
-
-        return "clienteform";
-    }
+   
 }

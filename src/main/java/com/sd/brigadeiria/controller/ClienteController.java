@@ -2,6 +2,8 @@ package com.sd.brigadeiria.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
+import java.util.Optional;
+
 import com.sd.brigadeiria.model.Cliente;
 import com.sd.brigadeiria.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class ClienteController {
         return lista;
     }
 
+    
     /*Exemplo de passagem de parâmetro
     Na url ?tipo= */
     @GetMapping("/clientesportipo" )
@@ -35,5 +38,5 @@ public class ClienteController {
         List<Cliente> lista = clienteRepository.findByCpf(cpf);
         return lista;
     }
-    
+      
 }

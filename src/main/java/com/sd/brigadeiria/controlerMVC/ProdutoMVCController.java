@@ -1,4 +1,4 @@
-package com.sd.brigadeiria.controller;
+package com.sd.brigadeiria.controlerMVC;
 
 import java.util.List;
 

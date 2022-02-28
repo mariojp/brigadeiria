@@ -36,37 +36,41 @@
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div>
-            <h1 class="h2">Criar Novo Cliente</h1>
+            <h1 class="h2">Editar Cliente</h1>
             <br />
-            <form action="/clientem/salvar" method="post">
-     
+            <form action="#" th:action="@{/salvarclientesm}" th:object="${cli}" method="post">
+                <input type="hidden" id="id" name="id">
                 <table cellpadding="10">
                     <tr>
                         <td>Nome:</td>
-                        <td><input type="text" name="nome"  /></td>
+                        <td><input type="text" required="required" name="nome" size="30" th:field="*{nome}"  /></td>
                     </tr>
                     <tr>
                         <td>CPF/CNPJ:</td>
-                        <td><input type="text" name="cpf" /></td>
+                        <td><input type="text" required="required" pattern="^(((\d{3}).(\d{3}).(\d{3})-(\d{2}))?((\d{2}).(\d{3}).(\d{3})/(\d{4})-(\d{2}))?)*$" name="cpf" th:field="*{cpf}"/></td>
                     </tr>
                     <tr>
                         <td>Tipo:</td>
-                        <td><input type="text" name="tipo" /></td>
+                        <td><select name="tipo">
+                          <option>Física</option>
+                          <option>Jurídica</option>
+                        </select>
+                          <!--<input type="text" name="tipo" /></td>-->
                     </tr>
 
                     <tr>
                         <td>Telefone:</td>
-                        <td><input type="text" name="telefone" /></td>
+                        <td><input type="tel" required="required"  th:field="*{telefone}" pattern="^\(d{2})\d{5}-\d{4}$" name="telefone" /></td>
                     </tr>
 
                     <tr>
                         <td>E-mail:</td>
-                        <td><input type="text" name="email"  /></td>
+                        <td><input type="email" required="required" name="email" size="30" th:field="*{email}" /></td>
                     </tr>
 
                     <tr>
                         <td>Endereço:</td>
-                        <td><input type="text" name="endereco" /></td>
+                        <td><input type="text" required="required" name="endereco" size="30" th:field="*{endereco}" /></td>
                     </tr>                            
                     <tr>
                         <td colspan="2"><button type="submit">Salvar</button> </td>

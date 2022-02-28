@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <title>Brigadeiria</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+  </head>
+
+<body>
+
+  <div th:replace="fragmentos/navsup :: navsup"></div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div th:replace="fragmentos/navlateral :: sidebar"></div>  
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div>
+            <h1 class="h2">Criar Novo Cliente</h1>
+            <br />
+            <form action="#" th:action="@{/salvarclientesm}" method="post">
+     
+                <table cellpadding="10">
+                    <tr>
+                        <td>Nome:</td>
+                        <td><input type="text" required="required" name="nome" size="30"  /></td>
+                    </tr>
+                    <tr>
+                        <td>CPF/CNPJ:</td>
+                        <td><input type="text" required="required" pattern="^(((\d{3}).(\d{3}).(\d{3})-(\d{2}))?((\d{2}).(\d{3}).(\d{3})/(\d{4})-(\d{2}))?)*$" name="cpf" /></td>
+                    </tr>
+                    <tr>
+                        <td>Tipo:</td>
+                        <td><select name="tipo">
+                          <option>Física</option>
+                          <option>Jurídica</option>
+                        </select>
+                          <!--<input type="text" name="tipo" /></td>-->
+                    </tr>
+
+                    <tr>
+                        <td>Telefone:</td>
+                        <td><input type="tel" required="required" pattern="^\(d{2})\d{5}-\d{4}$" name="telefone" /></td>
+                    </tr>
+
+                    <tr>
+                        <td>E-mail:</td>
+                        <td><input type="email" required="required" name="email" size="30"  /></td>
+                    </tr>
+
+                    <tr>
+                        <td>Endereço:</td>
+                        <td><input type="text" required="required" name="endereco" size="30" /></td>
+                    </tr>                            
+                    <tr>
+                        <td colspan="2"><button type="submit">Salvar</button> </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+    <!--JS-->
+    <!--<script src="js/bootstrap.bundle.min.js"></script>-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>
+        
