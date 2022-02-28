@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/casa")
+    @GetMapping("/")
     public String home(ModelMap model) {
-        model.addAttribute("nomeDoAtributo", "Treinaweb");
+       // model.addAttribute("nomeDoAtributo", "Treinaweb");
 
-        return "index";
+        return "logar";
     }
 
    

@@ -2,7 +2,6 @@ package com.sd.brigadeiria.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import java.util.Optional;
 
 import com.sd.brigadeiria.model.Cliente;
 import com.sd.brigadeiria.repository.ClienteRepository;
