@@ -1,6 +1,7 @@
-package com.sd.brigadeiria.controlerMVC;
+package com.sd.brigadeiria.mvc;
 
 
+import java.lang.ref.Cleaner.Cleanable;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,39 +12,48 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-public class ClienteMVCController {
+@RequestMapping("/cliente")
+
+public class ClienteController {
     
     @Autowired
     private ClienteRepository clienteRepository;
     
-    @GetMapping("/novocliente")
-    public String novoCliPage(Model model) {
-        Cliente cliente = new Cliente();
-        model.addAttribute("cliente", cliente);
-
-        return "cliente/clienteform";
+    
+    @GetMapping("/novo")
+    public String form(Cliente cliente) {
+        return "/cliente/clienteform";
     }
     
-    @GetMapping("/listaclientesm")
+    @GetMapping("/listar")
     public String listaClientes(Model model){
         model.addAttribute("lista", clienteRepository.findAll());
         return "cliente/clientes";
     }
 
-    @PostMapping("/salvarclientesm")
+    @PostMapping("/salvar")
     public String salvar(Cliente cliente){
-        List<Cliente> clientes = listaClientePorCPF(cliente.getCpf());
-        if (clientes.isEmpty()){
-            clienteRepository.save(cliente);
-            return "cliente/clientes";
-        }
 
-        return "erro";
+        Optional<Cliente> banco = clienteRepository.findByCpf(cliente.getCpf());
+        if( banco.isPresent() && cliente.getId() == null ) {
+            System.out.println("Cliente novo mas CPF já existe");
+            //Cliente novo mas CPF já existe
+            return "/erro";
+        }else if(banco.isPresent() && cliente.getId() != banco.get().getId() ){
+            System.out.println("Editando um cliente mas o cpf já pertence a outro");
+            //Editando um cliente mas o cpf já pertence a outro
+            return "/erro";
+        }
+        System.out.println("salvar");
+        //outros casos só salvar
+        clienteRepository.save(cliente);
         
+        return "cliente/clientes";
     }
 
     
@@ -54,15 +64,15 @@ public class ClienteMVCController {
         return "cliente/clientes";
      }
 
-     @GetMapping("/editarclientesm")
+     @GetMapping("/editar")
     public String mostrarEditForm(@RequestParam long id, Model model){
+
 
         try {
             Optional<Cliente> cliente = listaClientesPorId(id);
-            model.addAttribute("cli", cliente);
-            return "cliente/editclienteform";
+            model.addAttribute("cliente", cliente);
+            return "cliente/clienteform";
         } catch (ClienteNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return "erro";
         
@@ -70,10 +80,7 @@ public class ClienteMVCController {
 
     }
 
-    public List<Cliente> listaClientePorCPF(String cpf){
-        List<Cliente> lista = clienteRepository.findByCpf(cpf);
-        return lista;
-    }
+
 
     
     public Optional<Cliente> listaClientesPorId(Long id) throws ClienteNotFoundException {     

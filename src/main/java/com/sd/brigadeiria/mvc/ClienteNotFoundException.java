@@ -1,4 +1,4 @@
-package com.sd.brigadeiria.controlerMVC;
+package com.sd.brigadeiria.mvc;
 
 public class ClienteNotFoundException extends Throwable{
 

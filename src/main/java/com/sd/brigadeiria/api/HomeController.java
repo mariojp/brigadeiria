@@ -1,4 +1,4 @@
-package com.sd.brigadeiria.controller;
+package com.sd.brigadeiria.api;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
