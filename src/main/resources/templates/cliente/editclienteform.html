@@ -38,8 +38,8 @@
         <div>
             <h1 class="h2">Editar Cliente</h1>
             <br />
-            <form action="#" th:action="@{/salvarclientesm}" th:object="${cli}" method="post">
-                <input type="hidden" id="id" name="id">
+            <form action="#" th:action="@{/editarclientesm}" th:object="${cli}" method="post">
+                <input type="hidden" id="id" name="id" th:field="*{id}"/>
                 <table cellpadding="10">
                     <tr>
                         <td>Nome:</td>

@@ -46,6 +46,14 @@ public class ClienteMVCController {
         
     }
 
+    @PostMapping("/editarclientesm")
+    public String editar(Cliente cliente){
+       
+            clienteRepository.save(cliente);
+            return "cliente/clientes";
+               
+    }
+
     
     @GetMapping("/excluirclientesm")
     public String excluir( @RequestParam long id){
