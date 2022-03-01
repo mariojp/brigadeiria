@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" >
   <head>
     <title>Brigadeiria</title>
 
@@ -38,46 +38,52 @@
         <div>
             <h1 class="h2">Criar Novo Cliente</h1>
             <br />
-            <form action="#" th:action="@{/salvarclientesm}" method="post">
+            <form action="#" th:action="@{/cliente/salvar}" th:object="${cliente}" method="post">
      
+              <input type="hidden" th:field="*{id}" >
+
                 <table cellpadding="10">
                     <tr>
                         <td>Nome:</td>
-                        <td><input type="text" required="required" name="nome" size="30"  /></td>
+                        <td><input type="text" required="required" size="30" th:field="*{nome}"  /></td>
+
                     </tr>
                     <tr>
                         <td>CPF/CNPJ:</td>
-                        <td><input type="text" required="required" pattern="^(((\d{3}).(\d{3}).(\d{3})-(\d{2}))?((\d{2}).(\d{3}).(\d{3})/(\d{4})-(\d{2}))?)*$" name="cpf" /></td>
+                        <td><input th:field="*{cpf}" type="text" required="required" pattern="^(((\d{3}).(\d{3}).(\d{3})-(\d{2}))?((\d{2}).(\d{3}).(\d{3})/(\d{4})-(\d{2}))?)*$" name="cpf" /></td>
                     </tr>
                     <tr>
                         <td>Tipo:</td>
-                        <td><select name="tipo">
-                          <option>Física</option>
-                          <option>Jurídica</option>
+                        <td><select th:field="*{tipo}">
+                          <option value="Física">Física</option>
+                          <option value="Jurídica">Jurídica</option>
                         </select>
                     </tr>
 
                     <tr>
                         <td>Telefone:</td>
-                        <td><input type="tel" required="required" pattern="^\(d{2})\d{5}-\d{4}$" name="telefone" /></td>
+                        <td><input type="tel" required="required" pattern="^\(d{2})\d{5}-\d{4}$" th:field="*{telefone}"  /></td>
                     </tr>
 
                     <tr>
                         <td>E-mail:</td>
-                        <td><input type="email" required="required" name="email" size="30"  /></td>
+                        <td><input type="email" required="required" th:field="*{email}" size="30"  /></td>
                     </tr>
 
                     <tr>
                         <td>Endereço:</td>
-                        <td><input type="text" required="required" name="endereco" size="30" /></td>
+                        <td><input type="text" required="required" th:field="*{endereco}"  size="30" /></td>
                     </tr>                            
                     <tr>
                         <td colspan="2"><button type="submit">Salvar</button> </td>
                     </tr>
                 </table>
             </form>
+
         </div>
+
       </main>
+
     </div>
   </div>
 

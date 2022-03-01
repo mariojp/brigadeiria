@@ -1,4 +1,4 @@
-package com.sd.brigadeiria.controller;
+package com.sd.brigadeiria.api;
 
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@RestController
+@RestController("/api")
 public class ClienteController {
     
     @Autowired
@@ -34,7 +34,7 @@ public class ClienteController {
     
     @GetMapping("/clienteporcpf" )
     public List<Cliente> listaClientePorCPF(@RequestParam String cpf){
-        List<Cliente> lista = clienteRepository.findByCpf(cpf);
+        List<Cliente> lista = clienteRepository.findAllByCpf(cpf);
         return lista;
     }
       
