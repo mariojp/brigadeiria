@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,12 +26,23 @@ public class Produto {
     private String nome;
 
     @Column
+    private String tamanho;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    @Column
     @OneToMany
     private List<Sabor> sabores;
 
     @Column
     //Uso do tipo BigDecimal para representação do valor monetário
     private BigDecimal precoVenda;
+
+    @Column
+    //Uso do tipo BigDecimal para representação do valor monetário
+    private BigDecimal precoRevenda;
 
     public Produto(){
 
@@ -41,6 +54,14 @@ public class Produto {
         this.precoVenda = preco;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -59,4 +80,31 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getTamanho() {
+        return tamanho;
+    }
+
+    public void setTamanho(String tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public BigDecimal getPrecoRevenda() {
+        return precoRevenda;
+    }
+
+    public void setPrecoRevenda(BigDecimal precoRevenda) {
+        this.precoRevenda = precoRevenda;
+    }
+
+    
+    
 }

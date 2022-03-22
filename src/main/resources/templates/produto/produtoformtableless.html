@@ -36,48 +36,51 @@
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div>
-            <h1 class="h2">Criar Novo Cliente</h1>
+            <h1 class="h2">Criar Novo Produto</h1>
             <br />
-            <form action="#" th:action="@{/cliente/salvar}" th:object="${cliente}" method="post">
+            <form class="row g-3" action="#" th:action="@{/produto/salvar}" th:object="${produto}" method="post">
      
               <input type="hidden" th:field="*{id}" >
 
-                <table cellpadding="10">
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" required="required" size="30" th:field="*{nome}"  /></td>
+              <div class="col-12">
+                <label class="form-label">Nome do Produto</label>
+                <input class="form-control" type="text" required="required" size="30" th:field="*{nome}" />
+              </div>
 
-                    </tr>
-                    <tr>
-                        <td>CPF/CNPJ:</td>
-                        <td><input th:field="*{cpf}" type="text" required="required" pattern="^(((\d{3}).(\d{3}).(\d{3})-(\d{2}))?((\d{2}).(\d{3}).(\d{3})/(\d{4})-(\d{2}))?)*$" name="cpf" /></td>
-                    </tr>
-                    <tr>
-                        <td>Tipo:</td>
-                        <td><select th:field="*{tipo}">
-                          <option value="Física">Física</option>
-                          <option value="Jurídica">Jurídica</option>
-                        </select>
-                    </tr>
+              <div class="col-md-4">
+                <label class="form-label">Tamanho</label>
+                <select class="form-select" th:field="*{tamanho}">
+                  <option value="Grande">Grande</option>
+                  <option value="Lanche">Lanche</option>
+                  <option value="Festa">Festa</option>
+                </select>
+              </div>
 
-                    <tr>
-                        <td>Telefone:</td>
-                        <td><input type="tel" required="required" pattern="^\(d{2})\d{5}-\d{4}$" th:field="*{telefone}"  /></td>
-                    </tr>
+              <div class="col-md-4">
+                <label class="form-label">Categoria</label>
+                <select class="form-select" th:field="*{categoria}" required>
+                  <th:block th:each="cat : ${categorias}">
+                    <!-- th:selected = "${cat.id == selecionado}"-->
+                    <option  th:text="${cat.nome}" 
+                             th:value="${cat.id}"
+                    ></option>
+                  </th:block>
+              </select>
+              </div>
 
-                    <tr>
-                        <td>E-mail:</td>
-                        <td><input type="email" required="required" th:field="*{email}" size="30"  /></td>
-                    </tr>
+              <div  class="col-md-6">
+                <label class="form-label">Preço de Venda:</label>
+                <input class="form-control" type="number" step="0.01"  min="0.01" required="required"  th:field="*{precoVenda}" />
+              </div>
 
-                    <tr>
-                        <td>Endereço:</td>
-                        <td><input type="text" required="required" th:field="*{endereco}"  size="30" /></td>
-                    </tr>                            
-                    <tr>
-                        <td colspan="2"><button class="btn btn-primary" type="submit">Salvar</button> </td>
-                    </tr>
-                </table>
+              <div  class="col-md-6">
+                <label class="form-label">Preço de Revenda:</label>
+                <input class="form-control" type="number" step="0.01"  th:field="*{precoRevenda}" />
+              </div>
+              
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Salvar</button>
+              </div>    
             </form>
 
         </div>

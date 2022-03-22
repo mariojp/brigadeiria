@@ -37,37 +37,38 @@
       
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Lista de Clientes</h1>
+          <h1 class="h2">Lista de Produtos</h1>
           <div th:replace="fragmentos/navexportar :: navexportar"></div>
         </div> 
-        <a th:href="@{/cliente/novo}">Adicionar Novo Cliente</a>
+        <a th:href="@{/produto/novo}">Adicionar Novo Produto</a>
         <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nome</th>
-              <th scope="col">Cpf/CNPJ</th>
-              <th scope="col">Tipo</th>
-              <th scope="col">Telefone</th>
-              <th scope="col">Endereço</th>
-              <th scope="col">Opções</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Tamanho</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Preço de Revenda</th>
+              
             </tr>
           </thead>
           <tbody>
             <div id="content">
-              <tr th:each="cli: ${lista}">
-                <th scope="row" th:text="${cli.id}"></th>
-                <td  th:text="${cli.nome}"></td>
-                <td  th:text="${cli.cpf}"></td>
-                <td  th:text="${cli.tipo}"></td>
-                <td  th:text="${cli.telefone}"></td>
-                <td  th:text="${cli.endereco}"></td>
+              <tr th:each="prod: ${lista}">
+                <th scope="row" th:text="${prod.id}"></th>
+                <td  th:text="${prod.nome}"></td>
+                <td  th:text="${prod.categoria.nome}"></td>
+                <td th:text="${prod.tamanho}" ></td>
+                <td  th:text="${prod.precoVenda}"></td>
+                <td  th:text="${prod.precoRevenda}"></td>
+               
                 <td>
-                  <a th:href="@{/cliente/editar(id = ${cli.id})}">
+                  <a th:href="@{/produto/editar(id = ${prod.id})}">
                     <i class="bi bi-pencil-square"></i>
                   </a>
 
-                  <a th:href="@{/cliente/excluir(id = ${cli.id})}">
+                  <a th:href="@{/produto/excluir(id = ${prod.id})}">
                     <i class="bi bi-trash3"></i>
                   </a>
                 </div>

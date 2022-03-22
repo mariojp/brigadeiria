@@ -1,10 +1,6 @@
 package com.sd.brigadeiria.mvc;
 
-
-import java.lang.ref.Cleaner.Cleanable;
-import java.util.List;
 import java.util.Optional;
-
 import com.sd.brigadeiria.model.Cliente;
 import com.sd.brigadeiria.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/cliente")
-
-public class ClienteController {
+public class ClienteMVCController {
     
     @Autowired
     private ClienteRepository clienteRepository;
@@ -27,7 +22,7 @@ public class ClienteController {
     
     @GetMapping("/novo")
     public String form(Cliente cliente) {
-        return "/cliente/clienteform";
+        return "/cliente/clienteformtableless";
     }
     
     @GetMapping("/listar")
@@ -37,7 +32,7 @@ public class ClienteController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(Cliente cliente){
+    public String salvar(Cliente cliente, Model model){
 
         Optional<Cliente> banco = clienteRepository.findByCpf(cliente.getCpf());
         if( banco.isPresent() && cliente.getId() == null ) {
@@ -52,34 +47,25 @@ public class ClienteController {
         System.out.println("salvar");
         //outros casos só salvar
         clienteRepository.save(cliente);
-        
+        model.addAttribute("lista", clienteRepository.findAll());
         return "cliente/clientes";
     }
 
-    @PostMapping("/editarclientesm")
-    public String editar(Cliente cliente){
-       
-            clienteRepository.save(cliente);
-            return "cliente/clientes";
-               
-    }
-
-    
-    @GetMapping("/excluirclientesm")
-    public String excluir( @RequestParam long id){
+    @GetMapping("/excluir")
+    public String excluir( @RequestParam long id, Model model){
        
         clienteRepository.deleteById(id);
+        model.addAttribute("lista", clienteRepository.findAll());
         return "cliente/clientes";
      }
 
      @GetMapping("/editar")
     public String mostrarEditForm(@RequestParam long id, Model model){
-
-
+        
         try {
             Optional<Cliente> cliente = listaClientesPorId(id);
             model.addAttribute("cliente", cliente);
-            return "cliente/clienteform";
+            return "cliente/clienteformtableless";
         } catch (ClienteNotFoundException e) {
             e.printStackTrace();
             return "erro";
@@ -88,9 +74,6 @@ public class ClienteController {
 
     }
 
-
-
-    
     public Optional<Cliente> listaClientesPorId(Long id) throws ClienteNotFoundException {     
         Optional<Cliente> cliente = clienteRepository.findById(id);
         if(cliente.isPresent()){
@@ -98,8 +81,5 @@ public class ClienteController {
         }
         throw new ClienteNotFoundException("Cliente não pode ser encontrado");
     }
-
-
-    
 
 }   

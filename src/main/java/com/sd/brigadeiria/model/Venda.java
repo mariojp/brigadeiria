@@ -28,7 +28,7 @@ public class Venda {
 
     @Column
     @OneToMany
-    private List<Produto> pedido;
+    private List<Produto> produtos;
 
     @Column
     private BigDecimal valorPedido;
@@ -41,9 +41,9 @@ public class Venda {
 
     }
 
-    public Venda(Date data, List<Produto> pedido, BigDecimal  valorPedido, Cliente cliente){
+    public Venda(Date data, List<Produto> produtos, BigDecimal  valorPedido, Cliente cliente){
         this.data = data;
-        this.pedido = pedido;
+        this.produtos = produtos;
         this.cliente = cliente;
         this.valorPedido = valorPedido;
     }
@@ -63,10 +63,10 @@ public class Venda {
         this.valorPedido = valorPedido;
     }
     public List<Produto> getPedido() {
-        return pedido;
+        return produtos;
     }
-    public void setPedido(List<Produto> pedido) {
-        this.pedido = pedido;
+    public void setPedido(List<Produto> produtos) {
+        this.produtos = produtos;
     }
     public void setData(Date data) {
         this.data = data;
