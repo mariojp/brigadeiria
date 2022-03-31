@@ -1,11 +1,11 @@
 package com.sd.brigadeiria.repository;
 
-import com.sd.brigadeiria.model.Venda;
+import com.sd.brigadeiria.model.Pedido;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface VendaRepository extends JpaRepository<Venda, Long> {
+public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     
 }

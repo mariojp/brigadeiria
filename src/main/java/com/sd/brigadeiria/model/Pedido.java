@@ -1,7 +1,7 @@
 package com.sd.brigadeiria.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,20 +15,22 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table
-public class Venda {
+@Table(name="pedidos")
+public class Pedido {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "venda_id")
+    @Column(name = "pedidos_id")
     private Long id;
 
     @Column
-    private Date data;
+    private LocalDate data = LocalDate.now();;
 
+    //mappedBy - indica que já foi mapeado do outro lado
     @Column
-    @OneToMany
-    private List<Produto> produtos;
+    @OneToMany(mappedBy= "pedido")
+    private List<ItemPedido> itens;
+   // private List<Produto> produtos;
 
     @Column
     private BigDecimal valorPedido;
@@ -37,18 +39,17 @@ public class Venda {
     @OneToOne
     private Cliente cliente;
 
-    public Venda(){
+    public Pedido(){
 
     }
 
-    public Venda(Date data, List<Produto> produtos, BigDecimal  valorPedido, Cliente cliente){
-        this.data = data;
-        this.produtos = produtos;
+    public Pedido(List<Produto> produtos, BigDecimal  valorPedido, Cliente cliente){
+       // this.produtos = produtos;
         this.cliente = cliente;
         this.valorPedido = valorPedido;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
     public BigDecimal getValorPedido() {
@@ -62,13 +63,13 @@ public class Venda {
     public void setValorPedido(BigDecimal valorPedido) {
         this.valorPedido = valorPedido;
     }
-    public List<Produto> getPedido() {
+   /* public List<Produto> getPedido() {
         return produtos;
     }
     public void setPedido(List<Produto> produtos) {
         this.produtos = produtos;
-    }
-    public void setData(Date data) {
+    }*/
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

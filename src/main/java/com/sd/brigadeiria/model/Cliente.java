@@ -10,7 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table
+@Table(name="clientes")
 public class Cliente {
 
     @Id

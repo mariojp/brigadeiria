@@ -2,21 +2,21 @@ package com.sd.brigadeiria.api;
 
 import java.util.List;
 
-import com.sd.brigadeiria.model.Venda;
-import com.sd.brigadeiria.repository.VendaRepository;
+import com.sd.brigadeiria.model.Pedido;
+import com.sd.brigadeiria.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class VendaController {
+public class PedidoController {
     
     @Autowired
-    private VendaRepository vendaRepository;
+    private PedidoRepository vendaRepository;
 
     @GetMapping("/vendaporpessoa")
-    public List<Venda> listaVenda(){
-        List<Venda> venda = vendaRepository.findAll();
+    public List<Pedido> listaVenda(){
+        List<Pedido> venda = vendaRepository.findAll();
         return venda;
     }
  
