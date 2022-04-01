@@ -76,7 +76,4 @@ public class Usuario{
         this.email = login;
         this.password = password;
     }
-
-  
-
 }
