@@ -59,7 +59,7 @@ public class ClienteMVCController {
         return "cliente/clientes";
      }
 
-     @GetMapping("/editar")
+    @GetMapping("/editar")
     public String mostrarEditForm(@RequestParam long id, Model model){
         
         try {
@@ -76,6 +76,14 @@ public class ClienteMVCController {
 
     public Optional<Cliente> listaClientesPorId(Long id) throws ClienteNotFoundException {     
         Optional<Cliente> cliente = clienteRepository.findById(id);
+        if(cliente.isPresent()){
+         return cliente;
+        }
+        throw new ClienteNotFoundException("Cliente não pode ser encontrado");
+    }
+
+    public Optional<Cliente> listaClientePorNome(String nome) throws ClienteNotFoundException {     
+        Optional<Cliente> cliente = clienteRepository.findByNome(nome);
         if(cliente.isPresent()){
          return cliente;
         }

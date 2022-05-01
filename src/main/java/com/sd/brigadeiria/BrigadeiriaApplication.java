@@ -18,15 +18,16 @@ public class BrigadeiriaApplication {
 
 
 	@Bean
-	//@Profile("dev")
+	@Profile("dev")
 	CommandLineRunner initWebApplication(UsuarioRepository userRepository) {
 		return args -> {
 			System.out.println("Run Only dev Profile");
 
             String encodedPassword = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("password");
             Usuario usuario = new Usuario();
-			usuario.setLogin("root@email.com");
-			usuario.setSenha(encodedPassword);
+			usuario.setName("teste");
+			usuario.setEmail("root@email.com");
+			usuario.setPassword(encodedPassword);
             userRepository.save(usuario);
 		};
 	}

@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class PedidoController {
     
     @Autowired
-    private PedidoRepository vendaRepository;
+    private PedidoRepository pedidoRepository;
 
     @GetMapping("/vendaporpessoa")
     public List<Pedido> listaVenda(){
-        List<Pedido> venda = vendaRepository.findAll();
+        List<Pedido> venda = pedidoRepository.findAll();
         return venda;
     }
+
+    
  
 }

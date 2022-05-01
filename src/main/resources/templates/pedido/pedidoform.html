@@ -10,30 +10,92 @@
     <link href="../css/pedido.css" rel="stylesheet">
   </head>
 
-<body>
+ <body>
 
-  <div th:replace="fragmentos/navsup :: navsup"></div>
+  <div th:replace="~{fragmentos/navsup :: navsup}"></div>
 
   <div class="container-fluid">
     <div class="row">
-      <div th:replace="fragmentos/navlateral :: sidebar"></div>  
+      <div th:replace="~{fragmentos/navlateral :: sidebar}"></div>  
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <!-- MultiStep Form -->
-        <div >
-          <h1 class="h2">Cliente</h1>   
-          <form>
-            <div class="input-group">
-              <div class="form-outline">
-                <label class="form-label" for="form1">Nome do Cliente</label>
-                <input type="search" id="form1" class="form-control" />
-              </div>
-              <button type="button" class="btn btn-primary">
-                <i class="bi bi-search"></i>
-              </button>
-            </div>
-          </form>   
+      
+         <div class="row g-5">
+          
+          <div class="col-md-7 col-lg-8">
+            <h1 class="h2">Pedido</h1>   
+            <form th:action="@{/pedido/salvar}" th:object="${pedido}" method="post">
+
+                <div class="col-md-12 mt-2">
+                  <label class="form-label">Cliente</label>
+                  <select class="form-select" id="cliente"  required="required"  >
+                    <option>Selecione</option>
+                    <th:block th:each="cli : ${clientes}">
+                      <option  th:text="${cli.nome}" 
+                              th:value="${cli.id}"
+                      ></option>
+                    </th:block>
+                </select>
+                </div>
+
+
+                <div class="col-md-4  mt-2">
+                  <label class="form-label">Categoria</label>
+                  <select class="form-select" id="categoria"  required >
+                    <option>Selecione</option>
+                    <th:block th:each="cat : ${categorias}">
+                      <option  th:text="${cat.nome}" 
+                              th:value="${cat.id}"
+                      ></option>
+                    </th:block>
+                </select>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4  mt-2" id="blocoProduto" >
+                    <label class="form-label">Produto</label>
+                    <select class="form-select" required id="selectProduto">
+                      <option>Selecione</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4 mt-2" >
+                    <label class="form-label">Quantidade</label>
+                    <input class="form-control" type="number" required id="quantidade"/>
+                  </div>
+                      
+                  <div class="col-md-4 mt-2" >
+                    <button type="button" class="btn btn-primary" id="b-acrescentar">+</button>
+                    <button type="button" class="btn btn-danger" id="b-remover">-</button>
+                  </div>
+                </div>
+
+                <div class="col-12 mt-2">
+                  <button type="submit" class="btn btn-primary" >Salvar</button>
+                </div>
+            </form>
+          </div>
+          
+          <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-primary">Seu Pedido</span>
+              <span class="badge bg-primary rounded-pill">0</span>
+            </h4>
+            <ul class="list-group mb-3" id="lista-carrinho">
+              
+              
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total (R$)</span>
+                <strong>0</strong>
+              </li>
+            </ul>
+          </div>
+        
+      
+        
+ 
         </div>
+      
       </main>
 
     </div>
@@ -41,10 +103,12 @@
 
     <!--JS-->
     <!--<script src="js/bootstrap.bundle.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"> </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="../js/dashboard.js"></script>
+    <script src="../js/pedido.js"></script>
+
   </body>
-</html>
-        
+</html>        

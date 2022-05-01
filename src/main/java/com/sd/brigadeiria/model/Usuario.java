@@ -21,7 +21,7 @@ public class Usuario{
     private Long id;
 
     @NotEmpty
-    @Column()
+    @Column
     private String name;
 
     @NotEmpty

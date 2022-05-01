@@ -1,35 +1,46 @@
-$(".previous").click(function(){
+/*var campo = $("#input-cliente");
+campo.on("input", function(){
+    console.log(campo.val());
+});*/
 
-    current_fs = $(this).parent();
-    previous_fs = $(this).parent().prev();
-    
-    //Remove class active
-    $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-    
-    //show the previous fieldset
-    previous_fs.show();
-    
-    //hide the current fieldset with style
-    current_fs.animate({opacity: 0}, {
-    step: function(now) {
-    // for making fielset appear animation
-    opacity = 1 - now;
-    
-    current_fs.css({
-    'display': 'none',
-    'position': 'relative'
-    });
-    previous_fs.css({'opacity': opacity});
-    },
-    duration: 600
-    });
-    });
-    
-    $('.radio-group .radio').click(function(){
-    $(this).parent().find('.radio').removeClass('selected');
-    $(this).addClass('selected');
-    });
-    
-    $(".submit").click(function(){
-    return false;
-    });
+var botaoAcrescentar = $("#b-acrescentar");
+botaoAcrescentar.on("click", function(){
+    var nomeProduto = $("#selectProduto option:selected");
+    var quantidade = $("#quantidade");
+    $("#lista-carrinho").append(" <li class='list-group-item d-flex justify-content-between lh-sm'>" +
+                                " <div> " +
+                                " <h6 class='my-0'>"+ nomeProduto.text() +"</h6>" +     
+                                " </div>" + 
+                                " <span class='text-muted'>"+ quantidade.val() + "</span>" + 
+                                " </li>");
+ 
+});
+
+
+$("#categoria" ).change(function() {
+selectedOption = $(this).val();
+    if (selectedOption === "") {
+        $('#selectProduto').prop('disabled', 'disabled').val('');
+        $("#selectProduto option").slice(1).remove(); // keep first
+    } else {
+        $('#selectProduto').prop('disabled', false)
+        var orig = $(location).attr('origin');
+        var url = "/apiproduto/addSelectProdutoPorCategoria?idCategoria=" + selectedOption;
+        $.ajax({
+            url: url,
+        success: function (response) {
+                var len = response.length;
+                    $("#selectProduto option[value!='']").remove(); // keep first 
+                    for (var i = 0; i < len; i++) {
+                        var id = response[i]['id'];
+                        var name = response[i]['nome'];
+                        var tamanho = response[i]['tamanho']
+                        $("#selectProduto").append("<option id='produto' value='" + id + "'>" + name + " " + tamanho+ "</option>");
+                    }
+                },
+                error: function (e) {
+                    console.log("ERROR : ", e);
+                }
+        });
+    }
+    }).change();

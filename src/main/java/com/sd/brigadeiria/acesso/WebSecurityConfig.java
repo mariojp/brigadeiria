@@ -1,8 +1,8 @@
 package com.sd.brigadeiria.acesso;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -10,21 +10,39 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // @formatter:off
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests((authorize) -> authorize
-                        .antMatchers("/css/**","/h2-console","/h2-console/**").permitAll()
+        .authorizeRequests()
+        .anyRequest().authenticated().and()
+              /*  .authorizeRequests((authorize) -> authorize
+                        .antMatchers("/css/**").permitAll()
                         .antMatchers("/cliente/**").hasRole("ADMIN")
+                        .antMatchers("/produto/**").hasRole("ADMIN")
+                        .antMatchers("/api/**").permitAll()     )*/       
+                .formLogin(form -> form
+                  .loginPage("/login")
+                  .permitAll()
+                  .defaultSuccessUrl("/home", true)
                 )
-                .formLogin()
-                .and()
-                .headers().frameOptions().sameOrigin()
-                .and()
-                .csrf().ignoringAntMatchers("/h2-console/**","/admin/config");
+
+                .logout(logout -> logout.logoutUrl("/logout") );
+              
+                //.and()
+                //.headers().frameOptions().sameOrigin()
+               // .and()
+                //.csrf().ignoringAntMatchers("/h2-console/**","/admin/config");
 //                .and()
 //                .passwordManagement(Customizer.withDefaults());
     }
-    // @formatter:on
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/css/**")
+                .antMatchers("/api/**");
+    }
 }
+
+

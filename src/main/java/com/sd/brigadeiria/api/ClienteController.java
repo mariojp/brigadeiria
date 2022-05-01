@@ -7,10 +7,12 @@ import com.sd.brigadeiria.model.Cliente;
 import com.sd.brigadeiria.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@RestController("/api")
+@RestController
+@RequestMapping("/apicliente")
 public class ClienteController {
     
     @Autowired

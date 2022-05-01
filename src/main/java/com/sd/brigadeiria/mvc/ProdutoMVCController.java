@@ -36,6 +36,15 @@ public class ProdutoMVCController {
     @PostMapping("/salvar")
     public String salvar(Produto produto, Model model){
         
+        List <Produto> produtoBanco = produtoRepository.findByNome(produto.getNome());
+              
+        for (Produto produtoAtual : produtoBanco){
+            if( produto.getTamanho().equals(produtoAtual.getTamanho())) {
+                // produto já existe com o mesmo tamanho
+                return "/erro";
+            }
+        }
+
         produtoRepository.save(produto);
         model.addAttribute("lista", produtoRepository.findAll());
         return "produto/produtos";

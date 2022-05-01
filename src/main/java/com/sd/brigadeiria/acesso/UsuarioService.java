@@ -24,7 +24,7 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = this.userRepository.findUsuarioByLogin(username);
+        Usuario user = this.userRepository.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("username " + username + " is not found");
         }
@@ -39,8 +39,8 @@ public class UsuarioService implements UserDetailsService {
                 .unmodifiableList(AuthorityUtils.createAuthorityList("ROLE_USER"));
 
         CustomUserDetails(Usuario user) {
-            super.setLogin(user.getLogin());
-            super.setSenha(user.getSenha());
+            super.setEmail(user.getEmail());
+            super.setPassword(user.getPassword());
             //super.setRole(user.getRole());
         }
 
@@ -51,14 +51,14 @@ public class UsuarioService implements UserDetailsService {
             //return ROLE_USER;
         }
 
-        @Override
+      /* @Override
         public String getPassword() {
-            return getSenha();
-        }
+            return getPassword();
+        }*/
 
         @Override
         public String getUsername() {
-            return getLogin();
+            return getEmail();
         }
 
         @Override
