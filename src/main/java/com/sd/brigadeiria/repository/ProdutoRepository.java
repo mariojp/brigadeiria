@@ -13,6 +13,9 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
     List<Produto> findByCategoria(Categoria categoria);
     List<Produto> findByNome(String produto);
+    Produto findByNomeAndTamanho(String nome, String tamanho);
+    
+    
    
 
 }

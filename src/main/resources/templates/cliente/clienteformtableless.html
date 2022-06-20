@@ -22,6 +22,7 @@
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div>
+          
             <h1 class="h2">Criar Novo Cliente</h1>
             <br />
             <form class="row g-3" th:action="@{/cliente/salvar}" th:object="${cliente}" method="post">
@@ -64,7 +65,7 @@
   
                 <div class="col-md-4">
                   <label class="form-label">Telefone:</label>
-                  <input class="form-control" type="tel" required="required" th:field="*{telefone}" onkeypress="$(this).mask('(00) 0000-00009');"  />
+                  <input class="form-control" type="tel" required="required" th:field="*{telefone}"  onkeypress="$(this).mask('(00) 0000-00009');"  />
                 </div>
 
                 <div class="col-12">

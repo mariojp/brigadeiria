@@ -34,4 +34,11 @@ public class ProdutoController {
         List<Produto> produtos = produtoRepository.findByCategoria(categoria);
         return produtos;
     }
+
+   /* @GetMapping("/addSelectTamanhoPorNome")
+    public List<String> addSelectTamanhoPorNome(@RequestParam String produto, Mode model){
+        
+        List<String> tamanhos = produtoRepository.findByNome(produto);
+        return tamanhos;
+    } */
 }

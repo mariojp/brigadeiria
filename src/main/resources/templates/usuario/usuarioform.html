@@ -22,7 +22,7 @@
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div>
-            <h1 class="h2">Criar Novo Usuario</h1>
+            <h1 class="h2">Criar Novo Usuário</h1>
             <br />
             <form class="row g-3" th:action="@{/usuario/salvar}" th:object="${usuario}" method="post">
      
@@ -41,7 +41,7 @@
                 
                 <div class="col-12">
                   <label class="form-label">Senha:</label>
-                  <input class="form-control"  type="password" th:field="*{password}"  size="30"/>
+                  <input class="form-control"  type="password" required="required" th:field="*{password}"  size="30"/>
                 </div>
 
                 <div class="col-12">
@@ -64,22 +64,7 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"> </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="../js/dashboard.js"></script>
-    <script>
-      $('#TipoPessoa').change(function(e) {
-        let opcaoSelecionada = this.querySelector('option:checked');
-        
-        //desabilita e esconde todos os inputs
-        let inputs = $('#InputsDocumento input');
-        inputs.attr('type', 'hidden');
-        inputs.attr('disabled', '');
-        
-        //habilita e mostra o input relevante
-        let inputEscolhido = inputs.filter('#'+ opcaoSelecionada.dataset.tipo);
-        inputEscolhido.attr('type', 'text');
-        if (opcaoSelecionada.dataset.tipo !== 'placeholder')
-          inputEscolhido.removeAttr('disabled');
-      });
-    </script>
+  
   </body>
 </html>
         

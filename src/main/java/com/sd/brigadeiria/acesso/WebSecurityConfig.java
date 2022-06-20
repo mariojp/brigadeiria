@@ -13,13 +13,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .authorizeRequests()
-        .anyRequest().authenticated().and()
-              /*  .authorizeRequests((authorize) -> authorize
+        //.authorizeRequests()
+        //.anyRequest().authenticated().and()
+                .authorizeRequests((authorize) -> authorize
                         .antMatchers("/css/**").permitAll()
-                        .antMatchers("/cliente/**").hasRole("ADMIN")
-                        .antMatchers("/produto/**").hasRole("ADMIN")
-                        .antMatchers("/api/**").permitAll()     )*/       
+                        //.antMatchers("/cliente/**").hasRole("ADMIN")
+                        //.antMatchers("/produto/**").hasRole("ADMIN")
+                        .antMatchers("/api/**").permitAll()     )   
                 .formLogin(form -> form
                   .loginPage("/login")
                   .permitAll()

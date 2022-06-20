@@ -23,77 +23,78 @@
          <div class="row g-5">
           
           <div class="col-md-7 col-lg-8">
-            <h1 class="h2">Pedido</h1>   
+            <h1 class="h2">Novo Pedido</h1>   
             <form th:action="@{/pedido/salvar}" th:object="${pedido}" method="post">
 
                 <div class="col-md-12 mt-2">
                   <label class="form-label">Cliente</label>
-                  <select class="form-select" id="cliente"  required="required"  >
+                  <select class="form-select" field="*{cliente}" name="cliente" id="cliente"  required="required">
                     <option>Selecione</option>
                     <th:block th:each="cli : ${clientes}">
                       <option  th:text="${cli.nome}" 
-                              th:value="${cli.id}"
+                               th:value="${cli.id}"
+                               
                       ></option>
                     </th:block>
-                </select>
-                </div>
-
-
-                <div class="col-md-4  mt-2">
-                  <label class="form-label">Categoria</label>
-                  <select class="form-select" id="categoria"  required >
-                    <option>Selecione</option>
-                    <th:block th:each="cat : ${categorias}">
-                      <option  th:text="${cat.nome}" 
-                              th:value="${cat.id}"
-                      ></option>
-                    </th:block>
-                </select>
+                  </select>
                 </div>
 
                 <div class="row">
-                  <div class="col-md-4  mt-2" id="blocoProduto" >
+                  <div class="col-md-4  mt-2">
+                    <label class="form-label">Categoria</label>
+                    <select class="form-select" id="categoria"  required >
+                      <option>Selecione</option>
+                      <th:block th:each="cat : ${categorias}">
+                        <option  th:text="${cat.nome}" 
+                                th:value="${cat.id}"
+                        ></option>
+                      </th:block>
+                  </select>
+                  </div>
+
+                  <div class="col-md-8  mt-2" id="blocoProduto" >
                     <label class="form-label">Produto</label>
-                    <select class="form-select" required id="selectProduto">
+                    <select class="form-select" required id="selectProduto" >
                       <option>Selecione</option>
                     </select>
                   </div>
-
-                  <div class="col-md-4 mt-2" >
-                    <label class="form-label">Quantidade</label>
-                    <input class="form-control" type="number" required id="quantidade"/>
-                  </div>
-                      
-                  <div class="col-md-4 mt-2" >
-                    <button type="button" class="btn btn-primary" id="b-acrescentar">+</button>
-                    <button type="button" class="btn btn-danger" id="b-remover">-</button>
-                  </div>
+               </div>
+               
+              <div class="row">
+                <div class="col-md-4 mt-2" >
+                  <label class="form-label">Quantidade</label>
+                  <input class="form-control" type="number" required id="quantidade" min="1"/>
                 </div>
-
-                <div class="col-12 mt-2">
-                  <button type="submit" class="btn btn-primary" >Salvar</button>
+                    
+                <div class="col-md-4 mt-4" >
+                   <button type="button"  class="btn btn-primary  btn-sm" id="b-acrescentar">Adicionar Item</button>
                 </div>
-            </form>
+              </div> 
+
           </div>
-          
+
           <div class="col-md-5 col-lg-4 order-md-last">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
               <span class="text-primary">Seu Pedido</span>
-              <span class="badge bg-primary rounded-pill">0</span>
+              <span id="total-itens" class="badge bg-primary rounded-pill">0</span>
             </h4>
             <ul class="list-group mb-3" id="lista-carrinho">
               
               
-              <li class="list-group-item d-flex justify-content-between">
+              <li class="list-group-item d-flex justify-content-between" >
                 <span>Total (R$)</span>
-                <strong>0</strong>
+                <span id="valorTotal">0</span>
               </li>
             </ul>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" >Fechar Pedido</button>
+            </div>
           </div>
+
         
+        </form>
       
-        
- 
         </div>
       
       </main>

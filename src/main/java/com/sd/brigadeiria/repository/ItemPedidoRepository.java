@@ -1,13 +1,11 @@
 package com.sd.brigadeiria.repository;
 
-import com.sd.brigadeiria.model.Sabor;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.sd.brigadeiria.model.ItemPedido;
+
 @Repository
-public interface SaborRepository extends JpaRepository<Sabor, Long>{
-
-   
-
+public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Long> {
+    
 }

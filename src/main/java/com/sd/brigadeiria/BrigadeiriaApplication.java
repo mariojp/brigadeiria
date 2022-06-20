@@ -18,7 +18,7 @@ public class BrigadeiriaApplication {
 
 
 	@Bean
-	@Profile("dev")
+	@Profile("Dev")
 	CommandLineRunner initWebApplication(UsuarioRepository userRepository) {
 		return args -> {
 			System.out.println("Run Only dev Profile");

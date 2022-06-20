@@ -4,9 +4,14 @@ import java.util.Optional;
 import com.sd.brigadeiria.model.Cliente;
 import com.sd.brigadeiria.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,10 +29,26 @@ public class ClienteMVCController {
     public String form(Cliente cliente) {
         return "/cliente/clienteformtableless";
     }
-    
+
     @GetMapping("/listar")
-    public String listaClientes(Model model){
-        model.addAttribute("lista", clienteRepository.findAll());
+    public String listar(Model model){
+        return listaClientes(model,1,"nome");
+    }
+    
+    @GetMapping("/listar/{numPagina}")
+    public String listaClientes(Model model, @PathVariable("numPagina") int paginaAtual,
+                                @Param("campoOrd") String campoOrd ){
+
+        PageRequest pageble = PageRequest.of(paginaAtual-1, 2, Sort.by(Sort.Direction.ASC, campoOrd));
+        Page<Cliente> paginaClientes = clienteRepository.findAll(pageble);
+        long totalItens = paginaClientes.getTotalElements();
+        int totalPaginas = paginaClientes.getTotalPages();
+
+        model.addAttribute("paginaAtual", paginaAtual);
+        model.addAttribute("totalItens", totalItens);
+        model.addAttribute("totalPaginas", totalPaginas);
+        model.addAttribute("lista", paginaClientes );
+        model.addAttribute("campoOrd", campoOrd);
         return "cliente/clientes";
     }
 

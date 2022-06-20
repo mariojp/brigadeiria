@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,14 +29,23 @@ public class Pedido {
 
     //mappedBy - indica que já foi mapeado do outro lado
     @Column
-    @OneToMany(mappedBy= "pedido")
+    @OneToMany(mappedBy= "pedido", cascade = CascadeType.REMOVE)
     private List<ItemPedido> itens;
-   // private List<Produto> produtos;
 
     @Column
     private BigDecimal valorPedido;
 
+    private  Status status;
+
     
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @OneToOne
     private Cliente cliente;
 
@@ -43,7 +53,7 @@ public class Pedido {
 
     }
 
-    public Pedido(List<Produto> produtos, BigDecimal  valorPedido, Cliente cliente){
+    public Pedido( BigDecimal  valorPedido, Cliente cliente){
        // this.produtos = produtos;
         this.cliente = cliente;
         this.valorPedido = valorPedido;
@@ -63,12 +73,7 @@ public class Pedido {
     public void setValorPedido(BigDecimal valorPedido) {
         this.valorPedido = valorPedido;
     }
-   /* public List<Produto> getPedido() {
-        return produtos;
-    }
-    public void setPedido(List<Produto> produtos) {
-        this.produtos = produtos;
-    }*/
+
     public void setData(LocalDate data) {
         this.data = data;
     }
@@ -76,6 +81,18 @@ public class Pedido {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
+
+    
 
 
 
